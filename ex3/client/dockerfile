@@ -1,0 +1,10 @@
+FROM python:3-alpine
+
+RUN apk add  tcpdump
+RUN apk add iproute2-tc
+
+WORKDIR /usr/src/app
+
+COPY --from=scripts . /scripts
+COPY . .
+CMD ["python", "./main.py", "8.8.8.8"]

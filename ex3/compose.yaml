@@ -1,0 +1,22 @@
+services:
+  client:
+    hostname: client
+    build: 
+      context: client
+      additional_contexts:
+        - scripts=./scripts
+    networks:
+      - psi
+    volumes:
+      - ./client:/usr/src/app
+      - ./log:/usr/src/app/log
+    env_file:
+      - .env
+    command: ./run.sh 
+
+networks:
+  psi:
+    driver: bridge
+    name: psi
+    # attachable: true
+    external: true

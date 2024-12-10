@@ -1,0 +1,8 @@
+FROM python:3-alpine
+RUN apk add  tcpdump
+WORKDIR /usr/src/app
+
+COPY --from=scripts . /scripts
+COPY . .
+# CMD ["python", "./main.py"]
+CMD ["./run.sh"]
