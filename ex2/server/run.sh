@@ -1,9 +1,6 @@
 #!/bin/sh
 
-CMD="python main.py"
-
-ls /
-ls /scripts
+[ -n "$CMD" ] || CMD="python main.py"
 
 /scripts/run_tcpdump.sh server 
 

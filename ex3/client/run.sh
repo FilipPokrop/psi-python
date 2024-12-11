@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CMD="python main.py 8.8.8.8 -c 4"
+[ -n "$CMD" ] || CMD="python main.py 8.8.8.8 -c 4"
 
 /scripts/run_tcpdump.sh client
 

@@ -4,8 +4,15 @@ lang: pl-PL
 
 # Przykład prezentujący wysyłanie danych spoza pasma OOB
 
-Przykład składa się z dwóch programów w architekturze klient-serwer.
-Prezentuje on, w jaki sposób można obsługiwać przesyłanie danych spoza pasma. Klient zaczyna przesyłać dane, z prędkością większą niż serwer jest w stanie je przetworzyć. W normalnym przypadku po zatrzymaniu klienta połączenie zostałoby zerwane, jednak serwer dalej przetwarzałby dane znajdujące się w buforze.  Wysyłając bit OOB informujemy serwer, że połączenie zostało przerwane i natychmiast przestanie przetwarzać dane.
+Przykład składać się będzie z dwóch programów klienta i serwera. Klient po nawiązaniu po-
+łączenia rozpocznie przesyłanie dużej ilości danych do serwera. Serwer odbierając dane, będzie
+usypiany na pewien czas, co ma symulować długotrwałe przetwarzanie danych. Docelowo serwer
+będzie przetwarzał dane wolniej, niż klient wysyłał, co będzie skutkowało powolnym zapełnianiem
+bufora. W normalnej sytuacji po zakończeniu połączenia serwer przetwarzałby dane jeszcze przez
+jakiś czas. W tym przypadku klient jako ostatnią wiadomość wysyłać będzie dane spoza pasma, które
+oznaczać będą zakończenie połączenia. Gdy serwer otrzyma taką wiadomość, będzie mógł zamknąć
+połączenie.
+
 ## Uruchomienie
 serwer musi być uruchomiony jako pierwszy
 
@@ -47,10 +54,3 @@ opcje:
 
 ```
 
-W celu uruchomienia programów z dodatkowymi opcjami należy zmienić zmienną środowiskowa `CMD` w pliku `compose.yaml`.
-
-## Opis przykładu
-
-Klient wysyła dane szybciej, niż serwer jest w stanie je przetworzyć.
-Wyłączenie klienta poprzez naciśnięcie `Ctrl-C` spowoduje wysłanie bitu OOB,
-który dla serwera będzie sygnałem, żeby zakończyć połączenie.

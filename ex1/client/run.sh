@@ -1,10 +1,9 @@
 #!/bin/sh
 
-CMD="python main.py"
+[ -n "$CMD" ] || CMD="python main.py"
 
 /scripts/run_tcpdump.sh client
 
-# python main.py 
 ${CMD} 
 STATUS=$?
 
